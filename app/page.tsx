@@ -7,6 +7,7 @@ import { SearchTrigger } from "./components/SearchTrigger";
 import { TerminalShowcase } from "./components/TerminalBlock";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { AnimatedSection } from "./components/AnimatedSection";
+import { ChatWidget } from "./components/ChatWidget";
 import { FeedSlider } from "./components/FeedSlider";
 
 // ─── icons ────────────────────────────────────────────────────────────────────
@@ -439,7 +440,7 @@ function PublisherCard({ pub }: { pub: (typeof publishers)[number] }) {
       />
       {/* hover overlay */}
       <div className="absolute inset-0 flex flex-col justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-        style={{ background: "rgba(10,10,10,0.92)" }}>
+        style={{ background: "rgba(153,153,153,0.95)" }}>
         <p className="font-mono text-[9px] font-bold tracking-widest uppercase mb-2" style={{ color: "#e4000f" }}>{pub.name}</p>
         {pub.games.map((g) => (
           <p key={g} className="text-[10px] leading-snug" style={{ color: "rgba(255,255,255,0.7)" }}>{g}</p>
@@ -459,6 +460,7 @@ export default function Home() {
   return (
     <>
       <SearchModal />
+      <ChatWidget />
 
       {/* ── NAV ─────────────────────────────────────────────────────────── */}
       <header className="bg-white sticky top-0 z-10" style={{ borderBottom: "1px solid var(--color-border)" }}>
@@ -573,8 +575,8 @@ export default function Home() {
         </section>
 
         {/* ── FEED ────────────────────────────────────────────────────────── */}
-        <section className="border-b border-[var(--color-border)]" style={{ background: "var(--color-background)" }}>
-          <div className="py-10">
+        <section className="border-b border-[var(--color-border)] overflow-hidden" style={{ background: "var(--color-background)" }}>
+          <div className="py-10 overflow-hidden">
             {/* header */}
             <div className="max-w-5xl mx-auto px-6 flex items-center justify-between mb-5">
               <div className="flex items-center gap-2">
@@ -591,23 +593,23 @@ export default function Home() {
         </section>
 
         {/* ── NOVIDADES ───────────────────────────────────────────────────── */}
-        <section className="border-b border-[var(--color-border)]" style={{ background: "var(--color-background)" }}>
-          <div className="max-w-5xl mx-auto px-6 py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-0">
+        <section className="border-b border-[var(--color-border)] overflow-hidden" style={{ background: "var(--color-background)" }}>
+          <div className="max-w-5xl mx-auto px-6 py-6 overflow-hidden">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-0 min-w-0">
               <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--color-muted)] shrink-0 sm:w-28">Novidades</span>
-              <div className="flex flex-col sm:flex-row flex-1 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+              <div className="flex flex-col sm:flex-row flex-1 min-w-0 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
                 {highlights.map((h) => {
                   const badge = highlightBadge[h.type] ?? highlightBadge.ROM;
                   return (
                     <a key={h.title} href={h.href}
-                      className="flex-1 flex items-center gap-3 py-2 sm:py-0 sm:px-5 hover:text-[var(--color-foreground)] transition-colors group"
+                      className="flex-1 min-w-0 flex items-center gap-3 py-2 sm:py-0 sm:px-4 hover:text-[var(--color-foreground)] transition-colors group"
                       style={{ textDecoration: "none" }}>
                       <span className="font-mono text-[9px] font-bold tracking-widest uppercase px-1.5 py-0.5 shrink-0"
                         style={{ background: badge.bg, color: badge.color }}>{h.type}</span>
-                      <span className="text-xs text-[var(--color-foreground)] leading-tight truncate group-hover:text-[var(--color-accent)] transition-colors">
+                      <span className="text-xs text-[var(--color-foreground)] leading-tight truncate group-hover:text-[var(--color-accent)] transition-colors min-w-0">
                         {h.title}
                       </span>
-                      <span className="font-mono text-[10px] text-[var(--color-muted)] shrink-0 ml-auto hidden md:block">{h.date}</span>
+                      <span className="font-mono text-[10px] text-[var(--color-muted)] shrink-0 ml-auto hidden lg:block">{h.date}</span>
                     </a>
                   );
                 })}

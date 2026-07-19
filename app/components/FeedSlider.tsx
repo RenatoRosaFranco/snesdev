@@ -50,7 +50,7 @@ export function FeedSlider({ items }: { items: FeedItem[] }) {
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", overflow: "hidden", width: "100%" }}>
       {/* scroll buttons */}
       <button
         aria-label="Anterior"
@@ -85,6 +85,8 @@ export function FeedSlider({ items }: { items: FeedItem[] }) {
         onMouseLeave={onMouseUp}
         onMouseMove={onMouseMove}
         style={{
+          width: "100%",
+          boxSizing: "border-box",
           display: "flex",
           overflowX: "auto",
           scrollSnapType: "x mandatory",
