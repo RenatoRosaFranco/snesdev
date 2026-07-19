@@ -40,6 +40,50 @@ body {
   animation: cursor-blink 1.2s step-end infinite;
 }
 
+/* ── dark mode ───────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-background: #0d0d0d;
+    --color-foreground: #e0e0e0;
+    --color-muted:      #808080;
+    --color-border:     #272727;
+    --color-surface:    #161616;
+  }
+}
+
+[data-theme="dark"] {
+  --color-background: #0d0d0d;
+  --color-foreground: #e0e0e0;
+  --color-muted:      #808080;
+  --color-border:     #272727;
+  --color-surface:    #161616;
+}
+
+/* bg-white → bg-background in dark mode */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .bg-white {
+    background-color: var(--color-background) !important;
+  }
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--color-background) !important;
+}
+
+/* Publisher logos – brighter on dark background */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .publisher-logo {
+    filter: grayscale(100%) brightness(3.5) !important;
+    opacity: 0.3 !important;
+  }
+}
+
+[data-theme="dark"] .publisher-logo {
+  filter: grayscale(100%) brightness(3.5) !important;
+  opacity: 0.3 !important;
+}
+
 @keyframes crumb-slide-in {
   from { opacity: 0; transform: translateX(-6px); }
   to   { opacity: 1; transform: translateX(0); }
